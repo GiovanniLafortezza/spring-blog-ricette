@@ -3,6 +3,12 @@
 <head th:replace="fragments/resources :: head('Home Page')"></head>
 <body class="bg-danger">
 <div class="container">
+    <div th:if="${redirectMessage != null}"
+         class="alert alert-success alert-dismissible fade show mt-4"
+         role="alert">
+        <div th:text="${redirectMessage}"></div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <h1 class="text-center">
         Lista Ricette
     </h1>
