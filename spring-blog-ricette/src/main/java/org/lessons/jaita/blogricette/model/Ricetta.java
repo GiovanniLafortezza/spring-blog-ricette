@@ -24,6 +24,9 @@ public class Ricetta {
     @Lob
     private String text;
 
+    @ManyToOne
+    private Categoria categoria;
+
     //--------------- GETTER E SETTERadd -----------------
     public Integer getId() {
         return id;
