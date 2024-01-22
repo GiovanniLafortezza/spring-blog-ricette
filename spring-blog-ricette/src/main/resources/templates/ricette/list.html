@@ -24,6 +24,7 @@
                 <th scope="col">Tempo di preparazione</th>
                 <th scope="col">Numero di porzioni</th>
                 <th scope="col">Testo</th>
+                <th scope="col">Categoria</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -35,7 +36,8 @@
               <td th:text="${ricetta.preparationTime}"></td>
               <td th:text="${ricetta.numberPortions}"></td>
               <td th:text="${ricetta.text}"></td>
-              <td >
+              <td th:text="${ricetta.categoria.name}"></td>
+              <td>
                   <a class="btn btn-primary btn-sm" th:href="@{/ricette/edit/{id}(id=${ricetta.id})}"><i
                           class="fa-solid fa-pen-to-square"></i></a>
                   <form

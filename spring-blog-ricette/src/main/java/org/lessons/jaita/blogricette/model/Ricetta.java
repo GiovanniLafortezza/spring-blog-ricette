@@ -27,7 +27,7 @@ public class Ricetta {
     @ManyToOne
     private Categoria categoria;
 
-    //--------------- GETTER E SETTERadd -----------------
+    //--------------- GETTER E SETTER -----------------
     public Integer getId() {
         return id;
     }
@@ -82,5 +82,13 @@ public class Ricetta {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

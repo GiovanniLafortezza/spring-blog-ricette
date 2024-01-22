@@ -2,6 +2,7 @@ package org.lessons.jaita.blogricette.controller;
 
 import jakarta.validation.Valid;
 import org.lessons.jaita.blogricette.model.Ricetta;
+import org.lessons.jaita.blogricette.repository.CategoriaRepository;
 import org.lessons.jaita.blogricette.repository.RicettaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,9 @@ public class RicettaController {
     @Autowired
     RicettaRepository ricettaRepository;
 
+    @Autowired
+    CategoriaRepository categoriaRepository;
+
     @GetMapping
     public String index(Model model) {
         List<Ricetta> ricettaList = ricettaRepository.findAll();
@@ -33,6 +37,7 @@ public class RicettaController {
         Optional<Ricetta> result = ricettaRepository.findById(id);
         if (result.isPresent()) {
             model.addAttribute("ricetta", result.get());
+            model.addAttribute("categoriaList", categoriaRepository.findAll());
             return "ricette/edit";
 
         } else
@@ -53,12 +58,14 @@ public class RicettaController {
     public String create(Model model) {
         Ricetta ricetta = new Ricetta();
         model.addAttribute("ricetta", ricetta);
+        model.addAttribute("categoriaList", categoriaRepository.findAll());
         return "ricette/create";
     }
 
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("ricetta") Ricetta formRicetta, BindingResult bindingResult) {
+    public String store(@Valid @ModelAttribute("ricetta") Ricetta formRicetta, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("categoriaList", categoriaRepository.findAll());
             return "ricette/create";
         } else {
             Ricetta newRicetta = ricettaRepository.save(formRicetta);

@@ -16,7 +16,7 @@ public class Categoria {
     private String name;
 
     @OneToMany(mappedBy = "categoria")
-    private List<Ricetta> ricettaList;
+    private List<Ricetta> ricette;
 
     public Integer getId() {
         return id;
@@ -34,11 +34,11 @@ public class Categoria {
         this.name = name;
     }
 
-    public List<Ricetta> getRicettaList() {
-        return ricettaList;
+    public List<Ricetta> getRicette() {
+        return ricette;
     }
 
-    public void setRicettaList(List<Ricetta> ricettaList) {
-        this.ricettaList = ricettaList;
+    public void setRicette(List<Ricetta> ricette) {
+        this.ricette = ricette;
     }
 }
