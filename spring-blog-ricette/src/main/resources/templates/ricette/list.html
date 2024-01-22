@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/resources :: head('Home Page')"></head>
+<body class="bg-danger">
+<div class="container">
+    <h1 class="text-center">
+        Lista Ricette
+    </h1>
+    <hr>
+    <div th:if="${ricettaList.size() == 0}">Mi Dispiace Non Ci Sono Ricette</div>
+    <!-- table con le pizze -->
+    <table class="table table-hover table-dark" th:unless="${ricettaList.size() == 0}">
+        <thead>
+            <tr>
+                <th scope="col">Foto</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Ingredienti</th>
+                <th scope="col">Tempo di preparazione</th>
+                <th scope="col">Numero di porzioni</th>
+                <th scope="col">Testo</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr th:each="ricetta : ${ricettaList}">
+              <td><img th:src="${ricetta.image}" width="100" height="70" alt=""></td>
+              <td th:text="${ricetta.title}"></td>
+              <td th:text="${ricetta.ingredients}"></td>
+              <td th:text="${ricetta.preparationTime}"></td>
+              <td th:text="${ricetta.numberPortions}"></td>
+              <td th:text="${ricetta.text}"></td>
+              <td >
+                  <a class="btn btn-primary btn-sm" th:href="@{/ricette/edit/{id}(id=${ricetta.id})}"><i
+                          class="fa-solid fa-pen-to-square"></i></a>
+                  <form
+                          th:action="@{/ricette/delete/{id}(id=${ricetta.id})}"
+                          method="post"
+                          onsubmit="return confirm('Are you sure?')"
+                  >
+                      <button type="submit" class="btn btn-primary btn-sm mt-2"><i class="fa-solid fa-trash-can"></i>
+                      </button>
+                  </form>
+              </td>
+          </tr>
+        </tbody>
+    </table>
+    <div class="mt-3">
+        <a class="btn btn-primary" th:href="@{/ricette/create}">Aggiungi Ricetta</a>
+    </div>
+</div>
+
+<th:block th:replace="fragments/resources :: script"></th:block>
+</body>
+</html>
