@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/resources :: head('Create Page')"></head>
+<body class="bg-danger">
+<div class="container">
+    <h1 class="text-center">
+        Crea Ricetta
+    </h1>
+    <form
+            id="create-ricetta"
+            method="post"
+            th:object="${ricetta}"
+            th:action="@{/ricette/create}"
+            class="row g-3"
+    >
+        <div class="col-4">
+            <label for="title" class="form-label">Nome</label>
+            <input class="form-control" type="text" id="title" th:field="*{title}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-4">
+            <label for="image" class="form-label">Foto</label>
+            <input class="form-control" type="text" id="image" th:field="*{image}">
+        </div>
+        <div class="col-2">
+            <label for="preparationTime" class="form-label">Tempo di preparazione</label>
+            <input class="form-control" type="text" id="preparationTime" th:field="*{preparationTime}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('preparationTime')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('preparationTime')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-2">
+            <label for="numberPortions" class="form-label">Numero di porzioni</label>
+            <input class="form-control" type="number" id="numberPortions" th:field="*{numberPortions}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('numberPortions')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('numberPortions')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="ingredients" class="form-label">Ingredienti</label>
+            <textarea class="form-control" rows="3" id="ingredients" th:field="*{ingredients}" th:errorClass="is-invalid"></textarea>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('ingredients')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('ingredients')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="text" class="form-label">Testo</label>
+            <textarea class="form-control" rows="3" id="text" th:field="*{text}"></textarea>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Salva</button>
+            <a class="btn btn-primary" th:href="@{/ricette}">Elimina</a>
+        </div>
+    </form>
+</div>
+
+<th:block th:replace="fragments/resources :: script"></th:block>
+</body>
+</html>
